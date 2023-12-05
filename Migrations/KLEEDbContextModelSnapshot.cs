@@ -136,8 +136,7 @@ namespace KLEEBE.Migrations
 
                     b.HasIndex("RestaurantId");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("Reviews");
                 });
@@ -194,8 +193,8 @@ namespace KLEEBE.Migrations
                         .IsRequired();
 
                     b.HasOne("KLEEBE.Models.Users", "User")
-                        .WithOne("Reviews")
-                        .HasForeignKey("KLEEBE.Models.Reviews", "UserId")
+                        .WithMany("Reviews")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

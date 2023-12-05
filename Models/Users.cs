@@ -13,6 +13,6 @@ namespace KLEEBE.Models
         public bool IsAdmin { get; set; }
         [Required]
         public string? Uid { get; set; }
-        public Reviews? Reviews { get; set; }    
+        public List<Reviews>? Reviews { get; set; }    
     }
 }
