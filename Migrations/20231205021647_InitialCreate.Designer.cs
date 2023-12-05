@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace KLEEBE.Migrations
 {
     [DbContext(typeof(KLEEDbContext))]
-    [Migration("20231126233912_InitialCreate")]
+    [Migration("20231205021647_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -139,8 +139,7 @@ namespace KLEEBE.Migrations
 
                     b.HasIndex("RestaurantId");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("Reviews");
                 });
@@ -197,8 +196,8 @@ namespace KLEEBE.Migrations
                         .IsRequired();
 
                     b.HasOne("KLEEBE.Models.Users", "User")
-                        .WithOne("Reviews")
-                        .HasForeignKey("KLEEBE.Models.Reviews", "UserId")
+                        .WithMany("Reviews")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

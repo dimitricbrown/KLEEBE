@@ -130,8 +130,7 @@ namespace KLEEBE.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Reviews_UserId",
                 table: "Reviews",
-                column: "UserId",
-                unique: true);
+                column: "UserId");
         }
 
         /// <inheritdoc />

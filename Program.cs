@@ -62,12 +62,21 @@ app.MapGet("/checkuser/{uid}", (KLEEDbContext db, string uid) =>
     return Results.Ok(userExists);
 });
 
-// Create A New User
-app.MapPost("/api/user/new", (KLEEDbContext db, Users user) =>
+
+// Register A New User
+app.MapPost("/api/user/new", async (KLEEDbContext db, Users user) =>
 {
-    db.Users.Add(user);
-    db.SaveChanges();
-    return Results.Created($"/api/user/{user.Id}", user);
+    Users newUser = new()
+    {
+        DisplayName = user.DisplayName,
+        Email = user.Email,
+        IsAdmin = user.IsAdmin,
+        Uid = user.Uid,
+    };
+
+    db.Users.Add(newUser);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
 });
 
 // Update An Existing User
